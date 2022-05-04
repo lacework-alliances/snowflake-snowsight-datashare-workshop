@@ -1,5 +1,5 @@
 ---
-title: "AWS Immersion Day with Lacework"
+title: "Build Your Own Cloud Security Data Lake with Snowflake and Lacework"
 chapter: true
 weight: 1
 ---

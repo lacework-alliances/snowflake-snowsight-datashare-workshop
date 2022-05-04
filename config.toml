@@ -23,7 +23,7 @@ canonifyurls = true
   # Author of the site, will be used in meta information
   author = "Lacework"
   # Description of the site, will be used in meta information
-  description = "AWS Immersion Day with Lacework"
+  description = "Cloud Security Data Lake with Snowflake and Lacework"
   # Shows a checkmark for visited pages on the menu
   showVisitedLinks = true
   # Disable search function. It will hide search bar
