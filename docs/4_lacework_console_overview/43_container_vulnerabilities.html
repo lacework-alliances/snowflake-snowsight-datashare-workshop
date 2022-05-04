@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="oyo" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="description" content="AWS Immersion Day with Lacework">
+<meta name="author" content="Lacework">
+
+    <link rel="icon" href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/images/favicon.png" type="image/png">
+
+    <title>Container and Host Vulnerabilities :: Snowflake Snowsight Datashare Workshop</title>
+
+    
+    <link href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/css/nucleus.css?1651685824" rel="stylesheet">
+    <link href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/css/fontawesome-all.min.css?1651685824" rel="stylesheet">
+    <link href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/css/hybrid.css?1651685824" rel="stylesheet">
+    <link href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/css/featherlight.min.css?1651685824" rel="stylesheet">
+    <link href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/css/perfect-scrollbar.min.css?1651685824" rel="stylesheet">
+    <link href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/css/auto-complete.css?1651685824" rel="stylesheet">
+    <link href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/css/atom-one-dark-reasonable.css?1651685824" rel="stylesheet">
+    <link href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/css/theme.css?1651685824" rel="stylesheet">
+    <link href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/css/hugo-theme.css?1651685824" rel="stylesheet">
+    
+    <link href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/css/theme-mine.css?1651685824" rel="stylesheet">
+    
+    
+
+    <script src="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/js/jquery-3.3.1.min.js?1651685824"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    <script type="text/javascript">
+    (function() {
+        var didInit = false;
+        function initMunchkin() {
+            if (didInit === false) {
+                didInit = true;
+                Munchkin.init("112-TZM-766", { domainLevel: 3 });
+            }
+        }
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = '//munchkin.marketo.net/munchkin.js';
+        s.onreadystatechange = function() {
+            if (this.readyState == 'complete' || this.readyState == 'loaded') {
+                initMunchkin();
+            }
+        };
+        s.onload = initMunchkin;
+        document.getElementsByTagName('head')[0].appendChild(s);
+    })();
+</script>
+
+<link rel="stylesheet" href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/css/mp-devops-series.css">
+<link rel="stylesheet" href="https://pages.awscloud.com/js/forms2/css/forms2.css">
+  </head>
+  <body class="" data-url="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/4_lacework_console_overview/43_container_vulnerabilities.html">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      
+<svg id="Secondary_Lockup_Light_" data-name="Secondary Lockup (Light)" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 339">
+    <defs>
+        <style>.cls-1 {
+            fill: url(#Lacework_Coral_Gradient_RGB);
+        }
+
+        .cls-2 {
+            fill: url(#Lacework_Blue_Gradient_RGB);
+        }
+
+        .cls-3 {
+            fill: url(#Lacework_Teal_Gradient_RGB);
+        }
+
+        .cls-4 {
+            fill: #fff;
+        }</style>
+        <linearGradient id="Lacework_Coral_Gradient_RGB" x1="1691.79" y1="5.77" x2="1742.01" y2="92.74"
+                        gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#01023b"/>
+            <stop offset="1" stop-color="#ff646c"/>
+        </linearGradient>
+        <linearGradient id="Lacework_Blue_Gradient_RGB" x1="1935.19" y1="25.6" x2="1897.78" y2="90.4"
+                        gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#01023b"/>
+            <stop offset="0.24" stop-color="#071573"/>
+            <stop offset="0.49" stop-color="#0d27aa"/>
+            <stop offset="0.72" stop-color="#1135d2"/>
+            <stop offset="0.89" stop-color="#143dea"/>
+            <stop offset="1" stop-color="#1540f3"/>
+        </linearGradient>
+        <linearGradient id="Lacework_Teal_Gradient_RGB" x1="1718.43" y1="19.41" x2="1920" y2="19.41"
+                        gradientUnits="userSpaceOnUse">
+            <stop offset="0.2" stop-color="#00f8f8"/>
+            <stop offset="0.3" stop-color="#00f4f8"/>
+            <stop offset="0.4" stop-color="#02e7f8"/>
+            <stop offset="0.51" stop-color="#04d3f7"/>
+            <stop offset="0.61" stop-color="#08b6f6"/>
+            <stop offset="0.72" stop-color="#0c90f5"/>
+            <stop offset="0.83" stop-color="#1163f4"/>
+            <stop offset="0.9" stop-color="#1540f3"/>
+        </linearGradient>
+    </defs>
+    <a href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/">
+    <g id="Secondary_Lockup_Light_2" data-name="Secondary Lockup (Light)">
+        <g id="Shield">
+            <path class="cls-1"
+                  d="M1819.21,222s-100.78-22.07-100.78-121V0l40,38.82V101c0,58.84,60.73,78.81,60.73,78.81Z"/>
+            <path class="cls-2" d="M1819.21,222S1920,199.93,1920,101V0l-40,38.82V101c0,58.84-60.74,78.81-60.74,78.81Z"/>
+            <polygon class="cls-3" points="1879.95 38.82 1758.48 38.82 1718.43 0 1920 0 1879.95 38.82"/>
+        </g>
+        <g id="Wordmark">
+            <g id="Wordmark-2" data-name="Wordmark">
+                <path class="cls-4"
+                      d="M522.62,250.39l-.11.79c-5.07,36-29.14,55.87-67.77,55.87-46.7,0-76.87-33-76.87-84.05S408,139,454.74,139c36.76,0,60.51,18.77,65.15,51.5l.11.79h35.48l-.11-1c-2.51-22.6-12.46-43.07-28-57.62-17.92-16.75-43-25.6-72.6-25.6-67.08,0-112.15,46.62-112.15,116s45.07,116,112.15,116c43.21,0,96.13-22.94,103.1-87.59l.11-1Z"/>
+                <polygon class="cls-4"
+                         points="622.32 303.51 622.32 235.43 720.28 235.43 720.28 203.49 622.32 203.49 622.32 144.46 730.83 144.46 730.83 112.5 587.34 112.5 587.34 335.46 732.34 335.46 732.34 303.51 622.32 303.51"/>
+                <polygon class="cls-4"
+                         points="34.98 112.39 34.98 303.4 135.96 303.4 135.96 335.35 0 335.35 0 112.39 34.98 112.39"/>
+                <polygon class="cls-4"
+                         points="987.8 112.5 952.78 300.24 917.44 112.5 861.83 112.5 826.49 300.23 791.47 112.5 757.3 112.5 757.36 122.11 798.22 335.46 854.15 335.46 889.57 146.58 925.13 335.46 981.05 335.46 1021.97 121.54 1021.97 112.5 987.8 112.5"/>
+                <path class="cls-4"
+                      d="M1146.89,107c-68.87,0-115.15,46.62-115.15,116S1078,339,1146.89,339,1262,292.38,1262,223,1215.77,107,1146.89,107Zm79.87,116c0,50.45-32.1,84.35-79.87,84.35C1097.63,307.35,1067,275,1067,223s30.6-84.35,79.86-84.35C1194.66,138.65,1226.76,172.55,1226.76,223Z"/>
+                <polygon class="cls-4"
+                         points="1642.34 135.47 1642.34 112.5 1615.69 112.5 1511.55 210.94 1511.55 112.5 1476.56 112.5 1476.56 335.46 1511.55 335.46 1511.55 257.08 1537.56 232.94 1618.27 335.46 1642.34 335.46 1642.34 311.81 1562.52 209.67 1642.34 135.47"/>
+                <path class="cls-4"
+                      d="M1400.21,242.65c30.93-7.39,48.7-30.46,48.8-63.47.13-41.51-26.85-66.37-72.15-66.51l-89.23-.27-.69,223,35,.11.28-90.39,39.41.13,58.4,90.26h28.59l.07-23.65S1400.13,242.66,1400.21,242.65Zm-77.7-99,51.24.16c27.55.09,40.35,11,40.28,34.46s-12.94,34.3-40.49,34.22l-51.24-.16Z"/>
+                <path class="cls-4"
+                      d="M273,112.4H223.35l-63,206.48v16.47h31.92l19.9-66.88h72l19.9,66.88h32V318.88ZM221.78,235.65l26.29-89.11,26.52,89.11Z"/>
+            </g>
+            <g id="Registered">
+                <path class="cls-4"
+                      d="M1674.78,335.46a11.8,11.8,0,1,1,11.74-11.81A11.79,11.79,0,0,1,1674.78,335.46Zm0-22.59a10.78,10.78,0,1,0,10.74,10.78A10.8,10.8,0,0,0,1674.78,312.87Zm-5.36,3.75h6.93a4.24,4.24,0,0,1,4.12,4.28,4,4,0,0,1-2.35,3.78c-.1,0-.1.17-.07.24l2.55,5.62c.07.14,0,.2-.13.2h-1.58a.35.35,0,0,1-.33-.17l-2.31-5.32a.23.23,0,0,0-.24-.13h-4.75a.09.09,0,0,0-.1.1v5.35a.16.16,0,0,1-.17.17h-1.57a.16.16,0,0,1-.17-.17V316.79A.16.16,0,0,1,1669.42,316.62Zm1.91,1.71a.16.16,0,0,0-.17.16v4.75a.16.16,0,0,0,.17.17h4.85a2.53,2.53,0,0,0,2.38-2.51,2.6,2.6,0,0,0-2.45-2.57Z"/>
+            </g>
+        </g>
+    </g>
+</a>
+</svg>
+
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/js/lunr.min.js?1651685824"></script>
+<script type="text/javascript" src="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/js/auto-complete.js?1651685824"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/lacework-alliances.github.io\/snowflake-snowsight-datashare-workshop\/";
+    
+</script>
+<script type="text/javascript" src="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/js/search.js?1651685824"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1_lab_setup.html" title="Lab Setup" class="dd-item 
+        
+        
+        
+        ">
+      <a href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/1_lab_setup.html">
+          <b>1 </b>Lab Setup
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/1_lab_setup/11_aws_event_account.html" title="Access Your Temporary AWS Account" class="dd-item ">
+        <a href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/1_lab_setup/11_aws_event_account.html">
+        <b>1.1 </b>Access Your Temporary AWS Account
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/1_lab_setup/12_lacework_account.html" title="Access Lacework" class="dd-item ">
+        <a href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/1_lab_setup/12_lacework_account.html">
+        <b>1.2 </b>Access Lacework
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4_lacework_console_overview.html" title="Lacework Console Overview" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/4_lacework_console_overview.html">
+          <b>4 </b>Lacework Console Overview
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/4_lacework_console_overview/41_global_dashboard.html" title="Lacework Global Dashboard" class="dd-item ">
+        <a href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/4_lacework_console_overview/41_global_dashboard.html">
+        <b>4.1 </b>Lacework Global Dashboard
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/4_lacework_console_overview/42_aws_compliance.html" title="AWS Compliance" class="dd-item ">
+        <a href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/4_lacework_console_overview/42_aws_compliance.html">
+        <b>4.2 </b>AWS Compliance
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/4_lacework_console_overview/43_container_vulnerabilities.html" title="Container and Host Vulnerabilities" class="dd-item active">
+        <a href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/4_lacework_console_overview/43_container_vulnerabilities.html">
+        <b>4.3 </b>Container and Host Vulnerabilities
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/4_lacework_console_overview/44_resources.html" title="Resources" class="dd-item ">
+        <a href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/4_lacework_console_overview/44_resources.html">
+        <b>4.4 </b>Resources
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/4_lacework_console_overview/45_policies.html" title="Policies" class="dd-item ">
+        <a href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/4_lacework_console_overview/45_policies.html">
+        <b>4.5 </b>Policies
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/4_lacework_console_overview/46_alert_channels_rules.html" title="Alert Channels and Rules" class="dd-item ">
+        <a href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/4_lacework_console_overview/46_alert_channels_rules.html">
+        <b>4.6 </b>Alert Channels and Rules
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/099_survey/_index.ee.html" title="Survey" class="dd-item ">
+        <a href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/099_survey/_index.ee.html">
+        Survey
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3></h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/cleanup.html"><i class='fas fa-trash-alt'></i> Cleanup</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/jefferyfry/aws-immersion-day-with-lacework-code"><i class='fab fa-fw fa-github'></i> GitHub repo</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/resources.html"><i class='fab fa-readme'></i> Resources</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/schedule.html"><i class='fab fa-readme'></i> Schedule</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> </a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    <h5 class="copyright">&copy; 2022 Lacework, Inc. or its Affiliates. All rights reserved.<h5>
+</left>
+
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/'>AWS Immersion Day with Lacework</a> > <a href='https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/4_lacework_console_overview.html'>Lacework Console Overview</a> > Container and Host Vulnerabilities
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Container and Host Vulnerabilities
+            </h1>
+          
+
+        
+
+
+<p>Lacework provides the ability to assess, identify, and report vulnerabilities found on hosts, containers, registries and pods within your environment. This means you can identify and take action on software vulnerabilities in your environment and manage that risk proactively.</p>
+
+<p>Lacework continuously assesses vulnerability risks, identifies OS packages, and correlates them with publicly known vulnerabilities with risk ratings by severity and CVSS scores.</p>
+
+<p>In this section, we will explore container vulnerabilities. Lacework several types of container/image scanning as well as providing runtime protection. Lacework provides similar capabilities for hosts such as EC2 instances.
+
+<div class="notices info" ><p>Lacework provides Public Registry Scanning, Private Registry Scanning, Continuous Integration (CI) Scanning and Local Scanning.</p>
+</div>
+</p>
+
+<ol>
+<li>Select <strong>Vulnerabilities &gt; Containers</strong> in the Lacework Console. By default, the page displays <strong>Fixable</strong> and <strong>Active</strong> vulnerabilities.
+<img src="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/images/lacework-container-vulnerabilities.png" alt="Lacework Container Vulnerabilities" /></li>
+<li>Observe the <strong>Open Vulnerabilities</strong> panel. depicts open vulnerabilities. Hover your mouse over the <strong>Open Vulnerabilities</strong> chart to see the critical, high, medium, and low vulnerabilities.</li>
+<li>View the <strong>Vulnerabilties List</strong> panel. It shows the list of images with vulnerabilities.
+<img src="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/images/lacework-vulnerabilities-list.png" alt="Lacework Vulnerabilities List" /></li>
+<li>Click on an image in the list to view the image assessment details.
+<img src="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/images/lacework-image-assessment-details.png" alt="Lacework Image Assessment Details" /></li>
+<li>View the summary and list of CVEs in the <strong>CVE</strong> tab.</li>
+<li>Click on the <strong>Details</strong> tab. This provides image details.</li>
+<li>This image is deployed and is an active container. Scroll down and click on the <strong>Active Containers</strong> link.</li>
+<li>This Container Dossier provides the details and activity. Scroll down to the <strong>List of Active Containers</strong> panel to see where the container is deployed.
+<img src="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/images/lacework-active-containers.png" alt="Lacework Active Containers" /></li>
+</ol>
+
+<p>Lacework&rsquo;s Container Security features enable you to shift your cloud security left into your software delivery process at multiple stages. You can prevent security vulnerabilities from being deployed.</p>
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/4_lacework_console_overview/42_aws_compliance.html" title="AWS Compliance"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/4_lacework_console_overview/44_resources.html" title="Resources" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/js/clipboard.min.js?1651685824"></script>
+    <script src="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/js/perfect-scrollbar.min.js?1651685824"></script>
+    <script src="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/js/perfect-scrollbar.jquery.min.js?1651685824"></script>
+    <script src="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/js/jquery.sticky.js?1651685824"></script>
+    <script src="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/js/featherlight.min.js?1651685824"></script>
+    <script src="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/js/highlight.pack.js?1651685824"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/js/modernizr.custom-3.6.0.js?1651685824"></script>
+    <script src="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/js/learn.js?1651685824"></script>
+    <script src="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/js/hugo-learn.js?1651685824"></script>
+    
+        
+            <script src="https://lacework-alliances.github.io/snowflake-snowsight-datashare-workshop/mermaid/mermaid.js?1651685824"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    
+
+  </body>
+</html>
+

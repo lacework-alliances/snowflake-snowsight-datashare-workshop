@@ -1,0 +1,127 @@
+[
+{
+	"uri": "https://jefferyfry.github.io/aws-immersion-day-with-lacework/ee/",
+	"title": "AWS Immersion Day with Lacework",
+	"tags": [],
+	"description": "",
+	"content": " AWS Immersion Day with Lacework Welcome The Lacework Cloud Security Platform delivers comprehensive and continuous end-to-end AWS security and configuration support for both workloads and accounts running in cloud environments. As more organizations move their critical workloads to the cloud, there is an increasing need for a single, unified solution like the Lacework Cloud Security Platform that can identify, analyze, and report on misconfigurations, vulnerabilities, and behavioral anomalies in user and account behavior.\nIn this hands-on workshop, you will have the opportunity to explore the Lacework Cloud Security Platform and understand how it secures your AWS cloud environments.\nLearning Objectives  Understand Cloud Security Posture Management (CSPM) and how Lacework monitors for cloud misconfigurations. Cloud and User Activity Monitoring\u0026hellip; Vulnerabilty Discovery and Workload Protection \u0026hellip;.  The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how various services can be architected to build a solution while demonstrating best practices along the way. These examples are not intended for use in production environments.\n "
+},
+{
+	"uri": "https://jefferyfry.github.io/aws-immersion-day-with-lacework/ee/1_introduction.html",
+	"title": "Introduction",
+	"tags": [],
+	"description": "",
+	"content": "In this workshop, we will demonstrate\n"
+},
+{
+	"uri": "https://jefferyfry.github.io/aws-immersion-day-with-lacework/ee/2_event_engine_setup.html",
+	"title": "AWS Hosted Event Setup",
+	"tags": [],
+	"description": "",
+	"content": " Welcome to the Event Engine Setup section! This means that you are attending an AWS Hosted Workshop!! . Event Engine is a tool created at AWS that provisions AWS accounts for workshop events like this! These accounts will automatically terminate 24 hours after the workshop begins participants don\u0026rsquo;t have to worry about leaving anything on. Each workshop participant will receive their own Event Engine AWS account.\nWhat We Will Do  Get a temporary AWS account using the AWS Event Engine. Set up the AWS account and IAM roles. Provision a Cloud9 IDE instance. Clone our workshop GitHub repository which contains our code.  The next page will show you how to gain access to your Event Engine dashboard!\n"
+},
+{
+	"uri": "https://jefferyfry.github.io/aws-immersion-day-with-lacework/ee/3_cspm_plus.html",
+	"title": "Advanced Cloud Security Posture Management (CSPM+)",
+	"tags": [],
+	"description": "",
+	"content": "In this section, we will\n"
+},
+{
+	"uri": "https://jefferyfry.github.io/aws-immersion-day-with-lacework/ee/4_siem_aws_sec_hub_lacework.html",
+	"title": "SIEM: AWS Security Hub and Lacework",
+	"tags": [],
+	"description": "",
+	"content": "In this section, we will\n"
+},
+{
+	"uri": "https://jefferyfry.github.io/aws-immersion-day-with-lacework/ee/6_vuln_workload_protection_ecs.html",
+	"title": "Vulnerability &amp; Workload Protection (DevSecOps) with CodePipeline, CodeBuild, ECR &amp; ECS",
+	"tags": [],
+	"description": "",
+	"content": " In this section, we will set up a CI/CD pipeline with AWS CodePipeline and CodeBuild. Our pipeline will take our code from CodeCommit and build a docker image. It will the image to Amazon Elastic Container Registry (ECR). Then we will deploy it to a staging environment that runs on an Amazon Elastic Kubernetes Service (EKS) cluster using a Lambda function. At each stage, Lacework protects your application and cloud environment.\nWhat We Will Do  Setup Lacework to protect our AWS cloud environment. Clone our example code to our CodeCommit repo. Create a repository for our application in Amazon ECR and scan it with Lacework. Create an ECS \u0026ldquo;staging\u0026rdquo; cluster and secure it with Lacework. Use CloudFormation to create our CodePipeline, CodeBuild stage, Lacework vulnerability scan and Lambda deployment stage.  Architecture Pipeline "
+},
+{
+	"uri": "https://jefferyfry.github.io/aws-immersion-day-with-lacework/ee/5_vuln_workload_protection_eks.html",
+	"title": "Vulnerability &amp; Workload Protection (DevSecOps) with CodePipeline, CodeBuild, ECR &amp; EKS",
+	"tags": [],
+	"description": "",
+	"content": " In this section, we will set up a CI/CD pipeline with AWS CodePipeline and CodeBuild. Our pipeline will take our code from CodeCommit and build a docker image. It will the image to Amazon Elastic Container Registry (ECR). Then we will deploy it to a staging environment that runs on an Amazon Elastic Kubernetes Service (EKS) cluster using a Lambda function. At each stage, Lacework protects your application and cloud environment.\nWhat We Will Do  Setup Lacework to protect our AWS cloud environment. Clone our example code to our CodeCommit repo. Create a repository for our application in Amazon ECR and scan it with Lacework. Create an EKS \u0026ldquo;staging\u0026rdquo; cluster and secure it with Lacework. Use CloudFormation to create our CodePipeline, CodeBuild stage, Lacework vulnerability scan and Lambda deployment stage.  Architecture Pipeline "
+},
+{
+	"uri": "https://jefferyfry.github.io/aws-immersion-day-with-lacework/ee/7_conclusion.html",
+	"title": "Conclusion",
+	"tags": [],
+	"description": "",
+	"content": "In this workshop, we used\n"
+},
+{
+	"uri": "https://jefferyfry.github.io/aws-immersion-day-with-lacework/ee/2_event_engine_setup/21_aws_event_account.html",
+	"title": "AWS Event: Create an AWS account",
+	"tags": [],
+	"description": "",
+	"content": " Only complete this section if you are running the workshop through an AWS hosted event.\n For an AWS hosted event, you are provided with an AWS account through the AWS Event Engine service using a 12-digit hash by event staff. This is your unique access code.\n1 . Go to https://dashboard.eventengine.run/.\n Enter the provided hash code in the text box.\n Click on the Accept Terms \u0026amp; Login button.\n Select AWS Console.\n Then select Open AWS Console.\n   This workshop supports the region us-west-2 US West (Oregon). Please select US West (Oregon) in the top right corner.  You can leave the AWS console open.\nThis AWS account will expire at the end of the workshop and any resources will automatically be de-provisioned. You will not be able to access this account after today.\n "
+},
+{
+	"uri": "https://jefferyfry.github.io/aws-immersion-day-with-lacework/ee/2_event_engine_setup/22_cloud9.html",
+	"title": "Set up your Cloud9 IDE",
+	"tags": [],
+	"description": "",
+	"content": "AWS Cloud9 is a cloud-based integrated development environment (IDE) that lets you write, run, and debug your code with just a browser. It includes a code editor, debugger, and terminal. Cloud9 comes prepackaged with essential tools for popular programming languages, including JavaScript, Python, PHP, and more, so you don’t need to install files or configure your development machine to start new projects.\n Within the AWS console, use the region drop list to select us-west-2 (Oregon). The workshop script will provision the resources in this region.\n Navigate to the Cloud9 console or just search for it under the AWS services search.\n Click the Create environment button.\n For the name, enter jfrog-workshop and click Next Step.\n Select Other instance type and choose t3.medium.\n Leave all the other settings as default.\n Click Next Step.\n On the Review page, click Create environment. The Cloud9 environment will take a few minutes to provision.\n When the environment comes up, close the Welcome page tab.\n Close the lower work area tab.\n Open a new terminal tab in the main work area.\n  Your workspace should now look like this and can hide the left hand environment explorer by clicking on the left side environment tab.\nIf you don\u0026rsquo;t like this dark theme, you can change it from the View ► Themes menu.\n Cloud9 requires third-party-cookies. You can whitelist the specific domains. You are having issues with this, Ad blockers, javascript disablers, and tracking blockers should be disabled for the Cloud9 domain, or connecting to the workspace might can be impacted.\n "
+},
+{
+	"uri": "https://jefferyfry.github.io/aws-immersion-day-with-lacework/ee/2_event_engine_setup/23_create_role.html",
+	"title": "Create an IAM role for your workspace",
+	"tags": [],
+	"description": "",
+	"content": " Follow this link to create an IAM role with Administrator access. Confirm that AWS service and EC2 are selected, then click Next to view permissions. Confirm that AdministratorAccess is checked, then click Next through to Review. Enter JFrog-Workshop-Admin for the role name. Click Create Role.   "
+},
+{
+	"uri": "https://jefferyfry.github.io/aws-immersion-day-with-lacework/ee/2_event_engine_setup/24_attach_role_workspace.html",
+	"title": "Attach the IAM role to your Workspace",
+	"tags": [],
+	"description": "",
+	"content": " Follow this link to find your Cloud9 EC2 instance. Select the instance by clicking the checkbox, then choose Actions ► Security ► Modify IAM role.  Choose JFrog-Workshop-Admin from the IAM Role drop down, and click Save.   "
+},
+{
+	"uri": "https://jefferyfry.github.io/aws-immersion-day-with-lacework/ee/2_event_engine_setup/25_update_iam_settings.html",
+	"title": "Update IAM settings for your Workspace",
+	"tags": [],
+	"description": "",
+	"content": " Return to your Cloud9 workspace and click the gear icon (in top right corner). Select AWS Settings. Turn off AWS managed temporary credentials. Close the Preferences tab.  Copy and run the shell commands below in your Cloud9 terminal. These shell commands will:\n   Install jq- jq is a command-line tool for parsing JSON\n Ensure temporary credentials aren’t already in place.\n Remove any existing credentials file.\n Set the region to work with our desired region.\n Validate that our IAM role is valid.\nsudo yum -y install jq rm -vf ${HOME}/.aws/credentials export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account) export AWS_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r \u0026#39;.region\u0026#39;) test -n \u0026#34;$AWS_REGION\u0026#34; \u0026amp;\u0026amp; echo AWS_REGION is \u0026#34;$AWS_REGION\u0026#34; || echo AWS_REGION is not set echo \u0026#34;export ACCOUNT_ID=${ACCOUNT_ID}\u0026#34; | tee -a ~/.bash_profile echo \u0026#34;export AWS_REGION=${AWS_REGION}\u0026#34; | tee -a ~/.bash_profile aws configure set default.region ${AWS_REGION} aws configure get default.region aws sts get-caller-identity --query Arn | grep JFrog-Workshop-Admin -q \u0026amp;\u0026amp; echo \u0026#34;IAM role valid\u0026#34; || echo \u0026#34;IAM role NOT valid\u0026#34;  If the IAM role is not valid, DO NOT PROCEED. Go back and confirm the steps on this page.\n"
+},
+{
+	"uri": "https://jefferyfry.github.io/aws-immersion-day-with-lacework/ee/099_survey.html",
+	"title": "Survey",
+	"tags": [],
+	"description": "",
+	"content": " Survey To help us improve this product, please take some time to fill out the  Survey  "
+},
+{
+	"uri": "https://jefferyfry.github.io/aws-immersion-day-with-lacework/ee/categories.html",
+	"title": "Categories",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://jefferyfry.github.io/aws-immersion-day-with-lacework/ee/cleanup.html",
+	"title": "Cleanup",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://jefferyfry.github.io/aws-immersion-day-with-lacework/ee/resources.html",
+	"title": "Resources",
+	"tags": [],
+	"description": "",
+	"content": " [Lacework Platform Documentation]() - The full documentation.  "
+},
+{
+	"uri": "https://jefferyfry.github.io/aws-immersion-day-with-lacework/ee/tags.html",
+	"title": "Tags",
+	"tags": [],
+	"description": "",
+	"content": ""
+}]
